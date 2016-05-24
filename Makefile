@@ -10,15 +10,13 @@ run: load
 	dd if=/proc/cpuspeed count=1;
 
 load: cpuspeed.o
-	-su -c "insmod ./cpuspeed.ko" # mknod -m 666 /dev/cpuspeed c 33 0;"
-
+	-su -c "insmod ./cpuspeed.ko" 
 
 cpuspeed.o:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 unload:
-	-su -c " rmmod cpuspeed; "#\
-#	rm -fr /dev/cpuspeed;"
+	-su -c "rmmod cpuspeed"
 
 clean: unload
 	-@rm -fr *.o cpuspeed*.o cpuspeed*.ko .cpuspeed*.* cpuspeed*.*.* .tmp_versions [mM]odule*
